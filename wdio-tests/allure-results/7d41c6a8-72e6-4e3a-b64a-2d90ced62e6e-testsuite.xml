@@ -1,0 +1,37 @@
+<?xml version='1.0'?>
+<ns2:test-suite xmlns:ns2='urn:model.allure.qatools.yandex.ru' start='1620939838922' stop='1620939839005'>
+    <name>My Automated tester.</name>
+    <title>My Automated tester.</title>
+    <test-cases>
+        <test-case start='1620939838922' status='broken' stop='1620939839005'>
+            <name>should search for available rents in a specific location.</name>
+            <title>should search for available rents in a specific location.</title>
+            <labels>
+                <label name='language' value='javascript'/>
+                <label name='framework' value='wdio'/>
+                <label name='thread' value='0-0'/>
+            </labels>
+            <parameters>
+                <parameter kind='argument' name='browser' value='chrome-90.0.4430.212'/>
+            </parameters>
+            <steps>
+                <step start='1620939838925' status='passed' stop='1620939839003'>
+                    <name>GET /session/:sessionId/screenshot</name>
+                    <title>GET /session/:sessionId/screenshot</title>
+                    <attachments>
+                        <attachment title='Screenshot' source='b130289a-8dba-447b-bc61-14300137fb23-attachment.png' type='image/png' size='5435'/>
+                    </attachments>
+                    <steps/>
+                </step>
+            </steps>
+            <attachments/>
+            <failure>
+                <message>BayutPage.open is not a function</message>
+                <stack-trace>TypeError: BayutPage.open is not a function
+                    at Context.&lt;anonymous> (C:\Users\georg\OneDrive\Desktop\Informatica\Facultate\AutomatedTesting\wdio-tests\test\specs\test.e2e.js:5:25)
+                    at Context.executeAsync (C:\Users\georg\OneDrive\Desktop\Informatica\Facultate\AutomatedTesting\wdio-tests\node_modules\@wdio\utils\build\shim.js:136:25)
+                    at Context.testFrameworkFnWrapper (C:\Users\georg\OneDrive\Desktop\Informatica\Facultate\AutomatedTesting\wdio-tests\node_modules\@wdio\utils\build\test-framework\testFnWrapper.js:45:32)</stack-trace>
+            </failure>
+        </test-case>
+    </test-cases>
+</ns2:test-suite>

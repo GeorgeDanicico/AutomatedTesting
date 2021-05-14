@@ -1,0 +1,46 @@
+<?xml version='1.0'?>
+<ns2:test-suite xmlns:ns2='urn:model.allure.qatools.yandex.ru' start='1620940274840' stop='1620940276673'>
+    <name>My Automated tester.</name>
+    <title>My Automated tester.</title>
+    <test-cases>
+        <test-case start='1620940274840' status='broken' stop='1620940276672'>
+            <name>should search for available rents in a specific location.</name>
+            <title>should search for available rents in a specific location.</title>
+            <labels>
+                <label name='language' value='javascript'/>
+                <label name='framework' value='wdio'/>
+                <label name='thread' value='0-0'/>
+            </labels>
+            <parameters>
+                <parameter kind='argument' name='browser' value='chrome-90.0.4430.212'/>
+            </parameters>
+            <steps>
+                <step start='1620940274843' status='passed' stop='1620940276452'>
+                    <name>POST /session/:sessionId/url</name>
+                    <title>POST /session/:sessionId/url</title>
+                    <attachments>
+                        <attachment title='Request' source='76b0ea82-3503-4b79-bea1-ff3a14ea3b03-attachment.json' type='application/json' size='37'/>
+                    </attachments>
+                    <steps/>
+                </step>
+                <step start='1620940276453' status='passed' stop='1620940276670'>
+                    <name>GET /session/:sessionId/screenshot</name>
+                    <title>GET /session/:sessionId/screenshot</title>
+                    <attachments>
+                        <attachment title='Screenshot' source='a0c0523d-670e-4827-a763-862d548408a4-attachment.png' type='image/png' size='601574'/>
+                    </attachments>
+                    <steps/>
+                </step>
+            </steps>
+            <attachments/>
+            <failure>
+                <message>BayutPage.set_location_and_go is not a function</message>
+                <stack-trace>TypeError: BayutPage.set_location_and_go is not a function
+                    at Context.&lt;anonymous> (C:\Users\georg\OneDrive\Desktop\Informatica\Facultate\AutomatedTesting\wdio-tests\test\specs\test.e2e.js:8:25)
+                    at processTicksAndRejections (internal/process/task_queues.js:93:5)
+                    at async Context.executeAsync (C:\Users\georg\OneDrive\Desktop\Informatica\Facultate\AutomatedTesting\wdio-tests\node_modules\@wdio\utils\build\shim.js:136:16)
+                    at async Context.testFrameworkFnWrapper (C:\Users\georg\OneDrive\Desktop\Informatica\Facultate\AutomatedTesting\wdio-tests\node_modules\@wdio\utils\build\test-framework\testFnWrapper.js:52:18)</stack-trace>
+            </failure>
+        </test-case>
+    </test-cases>
+</ns2:test-suite>

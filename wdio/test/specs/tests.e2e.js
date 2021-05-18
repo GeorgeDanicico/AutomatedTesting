@@ -19,16 +19,16 @@ describe('Automated testing', () =>{
 
         // finding all the properties for sale in that area
         await expect(browser).toHaveTitle("Bayut: UAE's Largest Real Estate Portal");
-
+        // finding the button that will find the properties
         const btnFind = await browser.$('a[href*="/for-sale/property/"]');
         await btnFind.click();
         
+        // make sure that we are on the required website
         await expect(browser).toHaveTitle("Properties for Sale in Dubai Marina | Bayut.com");
 
-        const btnViewAll = await browser.$('div[class="_2f838ff4 _5b112776 _29dd7f18"]');
-        
-        
+        // a while loop that will go through all the apartments and check if they really have the location Dubai Marina
         let i = 0;
+        // on the website we can see that at the moment there are 24 properties on a page and 3000 in total
         while(i < 3000){
             i += 24;
             const locationsTextBoxes = await browser.$$('div[class="_7afabd84"][aria-label="Location"]');
@@ -39,37 +39,24 @@ describe('Automated testing', () =>{
             else{
                 j = 24 + 3000 - i;
             }
-
+            // we check to be sure that we selected the correct number of elements.
             await expect(locationsTextBoxes).toBeElementsArrayOfSize(j);
-   
+            // we check if indeed there is 'Dubai Marina' in the text.
             await locationsTextBoxes.forEach(text => {
                 expect(text).toHaveTextContaining('Dubai Marina');
             });
 
             if(i < 3000){
+                // then we scroll the page to the next button so that we can go on the next page.
                 if(j == 0) j++;
                 const element = locationsTextBoxes[j-1];
-                // scroll to that specific element
                 await element.scrollIntoView();
                 const btnNext = await browser.$('a[href*="/for-sale/property/dubai/dubai-marina/"][class="b7880daf"][title="Next"]');
                 await btnNext.click();
             }
 
         }
-        // var j = 24;
-        // const locationsTextBoxes = await browser.$$('div[class="_7afabd84"][aria-label="Location"]');
-        // await expect(locationsTextBoxes).toBeElementsArrayOfSize(j);
-
-        // await locationsTextBoxes.forEach(text => {
-        //     expect(text).toHaveTextContaining('Dubai Marina');
-        // });
-
-        // const element = locationsTextBoxes[23];
-        // // scroll to that specific element
-        // element.scrollIntoView();
-
-        // const btnNext = await browser.$('a[href*="/for-sale/property/dubai/dubai-marina/"][class="b7880daf"][title="Next"]');
-        // await btnNext.click();
+     
 
         
     });

@@ -1,25 +1,96 @@
 const CurrentPage = require('../pageobjects/login.page');
 
 describe('Automated testing', () =>{
-    it('should click on the button',async () =>{
+    it('Verify results match the search criteria.',async () =>{
+        // opening the website.
         await CurrentPage.open();
-        // await (await $('.a41c4dcc _6a3a3de9')).setValue('Dubai Marina');
 
-        const btnForSale = await browser.$('button[class="b7afbb84 b77a79f5"]');
+        // selecting the button for sale.
+        const btnForSale = await browser.$('button[class="b7afbb84"]');
         await btnForSale.click();
 
+        // filling the text box with the required location
         const locationText = await browser.$('input[type="text"]');
         await locationText.setValue('Dubai Marina');
 
+        // select the location in order to search properly
         const setLocationBtn = await browser.$('button[class="_0e756b14"]');
         await setLocationBtn.click();
 
-        const btnFind = await browser.$('a[href*="/to-rent/property/uae/"]');
+        // finding all the properties for sale in that area
         await expect(browser).toHaveTitle("Bayut: UAE's Largest Real Estate Portal");
+
+        const btnFind = await browser.$('a[href*="/for-sale/property/"]');
         await btnFind.click();
-        // await browser.click('.c3901770 _8c8f02f5');
         
-        await expect(browser).toHaveTitle("Properties for Rent in UAE | Bayut.com");
-        // await expect(locationText).toHaveTextContaining('Search properties for sale and to rent in the UAE');
+        await expect(browser).toHaveTitle("Properties for Sale in Dubai Marina | Bayut.com");
+
+        const btnViewAll = await browser.$('div[class="_2f838ff4 _5b112776 _29dd7f18"]');
+        
+        
+        let i = 0;
+        while(i < 3000){
+            i += 24;
+            const locationsTextBoxes = await browser.$$('div[class="_7afabd84"][aria-label="Location"]');
+            var j = 0;
+            if(i < 3000){
+                j = 24;
+            }
+            else{
+                j = 24 + 3000 - i;
+            }
+
+            await expect(locationsTextBoxes).toBeElementsArrayOfSize(j);
+   
+            await locationsTextBoxes.forEach(text => {
+                expect(text).toHaveTextContaining('Dubai Marina');
+            });
+
+            if(i < 3000){
+                if(j == 0) j++;
+                const element = locationsTextBoxes[j-1];
+                // scroll to that specific element
+                await element.scrollIntoView();
+                const btnNext = await browser.$('a[href*="/for-sale/property/dubai/dubai-marina/"][class="b7880daf"][title="Next"]');
+                await btnNext.click();
+            }
+
+        }
+        // var j = 24;
+        // const locationsTextBoxes = await browser.$$('div[class="_7afabd84"][aria-label="Location"]');
+        // await expect(locationsTextBoxes).toBeElementsArrayOfSize(j);
+
+        // await locationsTextBoxes.forEach(text => {
+        //     expect(text).toHaveTextContaining('Dubai Marina');
+        // });
+
+        // const element = locationsTextBoxes[23];
+        // // scroll to that specific element
+        // element.scrollIntoView();
+
+        // const btnNext = await browser.$('a[href*="/for-sale/property/dubai/dubai-marina/"][class="b7880daf"][title="Next"]');
+        // await btnNext.click();
+
+        
     });
+
+    it('Verify Popular Searches links work correctly.', async () => {
+        await CurrentPage.open();
+
+        const element = await browser.$('div[class="fa2044b7"]');
+        // scroll to that specific element
+        await element.scrollIntoView();
+
+        // find all the links.
+        const btnViewAll = await browser.$('div[class="_2f838ff4 _5b112776 _29dd7f18"]');
+        await btnViewAll.click();
+            
+        // get all links
+        const listLinks = await browser.$$('a[class="_78d325fa "][href*="/to-rent/apartments/dubai/"]');
+        await expect(listLinks).toBeElementsArrayOfSize(14);
+ 
+        // await listLinks[0].click();
+
+    });
+
 });

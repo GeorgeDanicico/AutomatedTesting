@@ -28,16 +28,21 @@ describe('Automated testing', () =>{
 
         // a while loop that will go through all the apartments and check if they really have the location Dubai Marina
         let i = 0;
-        // on the website we can see that at the moment there are 24 properties on a page and 3000 in total
-        while(i < 3000){
+
+        // this should get the extract the number of apartments from the text area.
+        // const apartmentsValue = await browser.$('span[class="ca3976f7"][aria-label="Summary text"]');
+        // var matches = await apartmentsValue.match(/\d+/g);
+
+        // on the website we can see that at the moment there are 24 properties on a page and 3003 in total(3003 were at the time)
+        while(i < 3003){
             i += 24;
             const locationsTextBoxes = await browser.$$('div[class="_7afabd84"][aria-label="Location"]');
             var j = 0;
-            if(i < 3000){
+            if(i < 3003){
                 j = 24;
             }
             else{
-                j = 24 + 3000 - i;
+                j = 24 + 3003 - i;
             }
             // we check to be sure that we selected the correct number of elements.
             await expect(locationsTextBoxes).toBeElementsArrayOfSize(j);
@@ -46,7 +51,7 @@ describe('Automated testing', () =>{
                 expect(text).toHaveTextContaining('Dubai Marina');
             });
 
-            if(i < 3000){
+            if(i < 3003){
                 // then we scroll the page to the next button so that we can go on the next page.
                 if(j == 0) j++;
                 const element = locationsTextBoxes[j-1];
@@ -67,16 +72,31 @@ describe('Automated testing', () =>{
         const element = await browser.$('div[class="fa2044b7"]');
         // scroll to that specific element
         await element.scrollIntoView();
+        
+        // Selecting the 'To Rent' tab
+        const tabs = await browser.$('div[class="d8530318"]');
+        await tabs.click();
 
-        // find all the links.
-        const btnViewAll = await browser.$('div[class="_2f838ff4 _5b112776 _29dd7f18"]');
-        await btnViewAll.click();
-            
+        // Should click on the View all button but the button is not interactable ???
+        // const btnViewAll = await browser.$('div[class="_2f838ff4 _5b112776 _29dd7f18"][role="button"]');
+        // await btnViewAll.click();
+
+
         // get all links
         const listLinks = await browser.$$('a[class="_78d325fa "][href*="/to-rent/apartments/dubai/"]');
         await expect(listLinks).toBeElementsArrayOfSize(14);
  
-        // await listLinks[0].click();
+        // trying to go through all the links to check if they load the pages.
+        // let i = 1;
+        // while(i <= 5){
+        //     console.log(i);
+        //     await listLinks[i].click();
+        //     await browser.back();
+        //     i++;
+        // }
+
+        // await listLinks[1].click();
+        // await browser.back();
 
     });
 
